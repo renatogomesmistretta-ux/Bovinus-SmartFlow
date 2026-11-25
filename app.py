@@ -1,115 +1,209 @@
 import streamlit as st
 import pandas as pd
+from database import consultar_dados
 
-# Configuração da página
 st.set_page_config(
     page_title="Bovinu's SmartFlow",
     page_icon="🥩",
     layout="wide"
 )
 
-# Título
 st.title("🥩 Bovinu's SmartFlow & Margin Analytics")
-st.subheader("Monitoramento operacional — Unidade Augusta")
+st.caption("Hackathon Tech FMU 2026.2 | Unidade Augusta")
 
-st.info(
-    "Projeto desenvolvido para o Hackathon Tech FMU 2026.2. "
-    "Este dashboard utiliza dados demonstrativos."
+dados = consultar_dados()
+
+st.sidebar.header("Filtros")
+
+setor = st.sidebar.selectbox(
+    "Setor",
+    ["Todos"] + sorted(dados["setor"].unique().tolist())
 )
 
-# Indicadores principais
-st.header("Indicadores Operacionais")
+if setor != "Todos":
+    dados = dados[dados["setor"] == setor]
 
-col1, col2, col3, col4 = st.columns(4)
+def moeda(valor):
+    return f"R$ {valor:,.2f}".replace(
+        ",", "X"
+    ).replace(".", ",").replace("X", ".")
 
-col1.metric("Clientes simulados", "1.240")
-col2.metric("Ticket médio", "R$ 85,00")
-col3.metric("Tempo médio de fila", "12 min")
-col4.metric("Ocupação das mesas", "68%")
+# Indicadores financeiros
+
+receita = dados["receita_total"].sum()
+custo = dados["custo_total"].sum()
+margem = receita - custo
+margem_pct = margem / receita * 100 if receita else 0
+
+st.header("Indicadores Financeiros")
+
+c1, c2, c3, c4 = st.columns(4)
+
+c1.metric("Receita estimada", moeda(receita))
+c2.metric("CMV estimado", moeda(custo))
+c3.metric("Margem estimada", moeda(margem))
+c4.metric("Margem percentual", f"{margem_pct:.1f}%")
 
 st.divider()
 
-# Análise do mix de pratos
+# Analise do mix de pratos
+
 st.header("Análise do Mix de Pratos")
 
-dados_mix = pd.DataFrame({
-    "Perfil": [
-        "Saladas e acompanhamentos",
-        "Mix equilibrado",
-        "Proteínas nobres"
-    ],
-    "Quantidade": [320, 450, 280],
-    "Custo estimado (R$)": [19.00, 35.60, 59.00],
-    "Receita estimada (R$)": [42.50, 42.50, 42.50]
-})
+mix = dados.groupby("prato")[
+    ["receita_total", "custo_total", "margem_contribuicao"]
+].sum()
 
-st.bar_chart(
-    dados_mix.set_index("Perfil")["Quantidade"]
+st.bar_chart(mix)
+st.dataframe(mix, use_container_width=True)
+
+# Simulador de pesagem
+
+st.header("Simulador de Mix e Margem")
+
+peso = st.slider("Peso do prato em gramas", 100, 1500, 500)
+
+proteina = st.slider("Percentual de proteínas", 0, 100, 40)
+
+preco_kg = st.number_input(
+    "Preço por quilo (R$)", min_value=1.0, value=85.0
 )
 
-st.dataframe(
-    dados_mix,
-    use_container_width=True,
-    hide_index=True
+peso_kg = peso / 1000
+
+receita_prato = peso_kg * preco_kg
+
+custo_prato = peso_kg * (
+    (proteina / 100) * 59
+    + (1 - proteina / 100) * 19
 )
+
+margem_prato = receita_prato - custo_prato
+
+c1, c2, c3 = st.columns(3)
+
+c1.metric("Valor do prato", moeda(receita_prato))
+c2.metric("Custo estimado", moeda(custo_prato))
+c3.metric("Margem estimada", moeda(margem_prato))
 
 st.divider()
 
-# Monitoramento das filas
+# Monitoramento de filas
+
 st.header("Monitoramento de Filas")
 
-dados_filas = pd.DataFrame({
-    "Etapa": ["Balança", "Churrasqueira", "Caixa"],
-    "Tempo (minutos)": [6.5, 5.5, 5.0]
-})
+filas = dados.groupby("setor")["tempo_minutos"].mean()
 
-st.bar_chart(
-    dados_filas.set_index("Etapa")
-)
+st.bar_chart(filas)
 
-st.dataframe(
-    dados_filas,
-    use_container_width=True,
-    hide_index=True
-)
+for nome, tempo in filas.items():
 
-st.divider()
+    if tempo >= 5:
+        st.error(f"🔴 {nome}: {tempo:.1f} minutos")
 
-# Status da operação
-st.header("Alertas Operacionais")
+        if nome == "Caixa":
+            st.warning("Recomendação: abrir caixa auxiliar.")
 
-col1, col2, col3 = st.columns(3)
+    elif tempo >= 3:
+        st.warning(f"🟡 {nome}: {tempo:.1f} minutos")
 
-col1.warning("⚠️ Balança: fila acima do ideal")
-col2.warning("⚠️ Churrasqueira: monitorar atendimento")
-col3.success("✅ Monitoramento do salão ativo")
+    else:
+        st.success(f"🟢 {nome}: {tempo:.1f} minutos")
 
 st.divider()
 
-# Status das mesas
-st.header("Monitoramento das Mesas")
+# Monitoramento dos saloes
 
-dados_mesas = pd.DataFrame({
-    "Salão": ["Principal", "Pista/Inferior", "Superior"],
-    "Total de mesas": [30, 20, 40],
-    "Mesas ocupadas": [22, 14, 28],
-    "Mesas disponíveis": [8, 6, 12]
-})
+st.header("Monitoramento das 90 Mesas")
 
-st.bar_chart(
-    dados_mesas.set_index("Salão")[
-        ["Mesas ocupadas", "Mesas disponíveis"]
-    ]
+st.caption("Simulação interativa da ocupação dos salões.")
+
+saloes = {
+    "Principal": 30,
+    "Pista/Inferior": 20,
+    "Superior": 40
+}
+
+for nome, total in saloes.items():
+
+    st.subheader(nome)
+
+    ocupadas = st.slider(
+        f"Mesas ocupadas - {nome}",
+        0, total, int(total * 0.7)
+    )
+
+    limpeza = st.slider(
+        f"Aguardando limpeza - {nome}",
+        0, total - ocupadas, 0
+    )
+
+    livres = total - ocupadas - limpeza
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric("Ocupadas", ocupadas)
+    c2.metric("Limpeza pendente", limpeza)
+    c3.metric("Disponíveis", livres)
+
+    st.progress(ocupadas / total)
+
+    if limpeza >= 3:
+        st.warning("Acionar equipe de limpeza.")
+
+st.divider()
+
+# Desperdicio e reposicao
+
+st.header("Desperdício e Reposição")
+
+producao = st.number_input(
+    "Alimentos produzidos (kg)", min_value=1.0, value=100.0
 )
 
-st.dataframe(
-    dados_mesas,
-    use_container_width=True,
-    hide_index=True
+sobras = st.number_input(
+    "Sobras de alimentos (kg)",
+    min_value=0.0,
+    max_value=producao,
+    value=min(5.0, producao)
 )
 
-# Rodapé
-st.caption(
-    "Hackathon Tech FMU 2026.2 | Ciência de Dados e Inteligência Artificial | "
-    "Dados demonstrativos, não reais."
+desperdicio = sobras / producao * 100
+
+st.metric("Índice de desperdício", f"{desperdicio:.1f}%")
+
+if desperdicio > 5:
+    st.warning("Reavaliar produção e reposição.")
+
+for cuba in ["Saladas", "Pratos quentes", "Proteínas"]:
+
+    nivel = st.slider(f"Nível da cuba - {cuba}", 0, 100, 70)
+
+    if nivel <= 20:
+        st.error(f"Reposição necessária: {cuba}")
+
+    elif nivel <= 40:
+        st.warning(f"Monitorar reposição: {cuba}")
+
+    else:
+        st.success(f"Nível adequado: {cuba}")
+
+st.divider()
+
+# Base de dados
+
+st.header("Base de Dados Operacionais")
+
+st.dataframe(dados, use_container_width=True)
+
+st.download_button(
+    "Exportar dados em CSV",
+    dados.to_csv(index=False).encode("utf-8"),
+    "relatorio_smartflow.csv",
+    "text/csv"
+)
+
+st.info(
+    "MVP acadêmico com dados sintéticos e simulações "
+    "interativas. Não conectado à operação real do restaurante."
 )
