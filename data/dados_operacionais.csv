@@ -1,0 +1,16 @@
+data,setor,tempo_minutos,prato,quantidade,custo_unitario,preco_venda
+2026-11-01,Balanca,6.5,Proteina nobre,35,24.00,59.90
+2026-11-01,Churrasqueira,8.0,Mix equilibrado,42,18.00,42.50
+2026-11-01,Caixa,4.0,Saladas e acompanhamentos,28,8.00,24.90
+2026-11-02,Balanca,7.2,Proteina nobre,40,24.00,59.90
+2026-11-02,Churrasqueira,9.0,Mix equilibrado,38,18.00,42.50
+2026-11-02,Caixa,3.5,Saladas e acompanhamentos,32,8.00,24.90
+2026-11-03,Balanca,5.5,Proteina nobre,30,24.00,59.90
+2026-11-03,Churrasqueira,7.0,Mix equilibrado,45,18.00,42.50
+2026-11-03,Caixa,4.5,Saladas e acompanhamentos,25,8.00,24.90
+2026-11-04,Balanca,8.0,Proteina nobre,48,24.00,59.90
+2026-11-04,Churrasqueira,9.5,Mix equilibrado,50,18.00,42.50
+2026-11-04,Caixa,5.0,Saladas e acompanhamentos,35,8.00,24.90
+2026-11-05,Balanca,6.0,Proteina nobre,37,24.00,59.90
+2026-11-05,Churrasqueira,6.5,Mix equilibrado,41,18.00,42.50
+2026-11-05,Caixa,3.0,Saladas e acompanhamentos,29,8.00,24.90
