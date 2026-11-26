@@ -113,3 +113,19 @@ Diagnóstico automatizado dos indicadores financeiros e operacionais, com classi
 **BoviCore — Inteligência que transforma operações.**
 
 Hackathon Tech FMU 2026.2
+
+## Materiais oficiais de apresentação
+
+- [Apresentação PowerPoint](./BoviCore%20-%20Apresenta%C3%A7%C3%A3o%20final.pptx)
+- [Vídeo demonstrativo](./Apresenta%C3%A7%C3%A3o%20v%C3%ADdeo%20-%20BoviCore.mp4)
+- [Acesse a plataforma BoviCore](https://bovicore.streamlit.app/)
+
+## Equipe BoviCore
+
+- Renato Gomes Mistretta
+- Fernando Diógenes Santos
+- Rodrigo Lemos Poletti
+
+**Hackathon Tech FMU 2026.2**
+
+Transformamos dados em decisões, decisões em eficiência e eficiência em resultados.
