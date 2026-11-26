@@ -72,3 +72,44 @@ Ciência de Dados aplicada à inteligência operacional e financeira.
 ---
 
 **BOVICORE — Inteligência que transforma operações.**
+
+
+---
+
+## Demonstração da plataforma
+
+### 1. Visão financeira e análise do mix de pratos
+
+Painel de indicadores financeiros, permitindo acompanhar receitas, custos, margens e o desempenho dos diferentes tipos de pratos.
+
+![Visão financeira](screenshots/01_visao_financeira.jpeg)
+
+### 2. Simulador de margem e monitoramento de filas
+
+Simulação interativa da composição dos pratos e identificação de gargalos operacionais nos pontos de atendimento.
+
+![Simulador e filas](screenshots/02_simulador_e_filas.jpeg)
+
+### 3. Monitoramento das 90 mesas
+
+Gestão visual da ocupação dos três salões, identificando mesas ocupadas, disponíveis e aguardando limpeza.
+
+![Monitoramento de mesas](screenshots/03_monitoramento_mesas.jpeg)
+
+### 4. Controle de desperdício e reposição
+
+Monitoramento dos níveis de abastecimento das cubas e cálculo do índice de desperdício de alimentos.
+
+![Buffet e desperdício](screenshots/04_buffet_desperdicio.jpeg)
+
+### 5. Central de Inteligência Operacional
+
+Diagnóstico automatizado dos indicadores financeiros e operacionais, com classificação de criticidade e recomendações gerenciais para auxiliar a tomada de decisão.
+
+![Central de Inteligência](screenshots/05_central_inteligencia.jpeg)
+
+---
+
+**BoviCore — Inteligência que transforma operações.**
+
+Hackathon Tech FMU 2026.2
