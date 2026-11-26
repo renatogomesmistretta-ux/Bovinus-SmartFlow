@@ -24,6 +24,33 @@ st.divider()
 
 dados = consultar_dados()
 
+st.sidebar.markdown(
+    """
+    <div style="font-size:30px;font-weight:900;">
+        BOVI<span style="color:#DC2626;">CORE</span>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.sidebar.caption("Inteligência Operacional e Financeira")
+
+st.sidebar.divider()
+
+st.sidebar.header("Navegação")
+
+st.sidebar.markdown("""
+- [Visão financeira](#indicadores-financeiros)
+- [Análise de pratos](#analise-do-mix-de-pratos)
+- [Simulador de margem](#simulador-de-mix-e-margem)
+- [Gestão de filas](#monitoramento-de-filas)
+- [Gestão de salões](#monitoramento-das-90-mesas)
+- [Buffet e desperdício](#controle-de-desperdicio) - [Central de inteligência](#central-de-inteligencia-operacional)
+- [Base de dados](#base-de-dados-operacionais)
+""")
+
+st.sidebar.divider()
+
 st.sidebar.header("Filtros")
 
 setor = st.sidebar.selectbox(
