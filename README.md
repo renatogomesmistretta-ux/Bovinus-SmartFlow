@@ -1,62 +1,74 @@
-# Bovinu's SmartFlow & Margin Analytics
+# BoviCore
 
-## Hackathon Tech FMU 2026.2
-### Ciência de Dados e Inteligência Artificial
+**Inteligência que transforma operações.**
 
-Projeto desenvolvido para o Bovinu's Grill & Beer — Unidade Augusta.
+Plataforma de Inteligência Operacional e Financeira desenvolvida para o Hackathon Tech FMU 2026.2, com foco na gestão do Bovinu's Grill & Beer — Unidade Augusta.
 
-## 1. Problema
+## Acesse a plataforma
 
-O restaurante apresenta desafios operacionais relacionados a:
+https://bovicore.streamlit.app/
 
-- Filas na balança, churrasqueira e caixa.
-- Tempo de espera dos clientes.
-- Controle do mix de pratos e custos.
-- Limpeza e giro das mesas.
-- Reposição de alimentos e controle de desperdício.
+## Sobre o projeto
 
-## 2. Solução proposta
+O BoviCore foi desenvolvido com o objetivo de transformar dados operacionais e financeiros em informações estratégicas, auxiliando a tomada de decisão na gestão de restaurantes.
 
-O Bovinu's SmartFlow é um sistema de análise de dados que busca integrar informações operacionais e financeiras em um dashboard interativo.
+A plataforma centraliza indicadores de desempenho, identifica gargalos operacionais e apresenta recomendações gerenciais automatizadas.
 
-A solução permite acompanhar indicadores e identificar possíveis gargalos na operação.
+## Funcionalidades
 
-## 3. Objetivos
+- Indicadores financeiros de receita, CMV e margem.
+- Análise do mix de pratos.
+- Simulador de margem financeira.
+- Monitoramento de filas e tempos de espera.
+- Gestão de 90 mesas distribuídas em três salões.
+- Monitoramento de ocupação e limpeza.
+- Controle de abastecimento das cubas do buffet.
+- Análise de desperdício de alimentos.
+- Central de Inteligência Operacional.
+- Alertas e recomendações gerenciais automatizadas.
+- Filtragem de dados por setor.
+- Exportação de dados em CSV.
 
-- Monitorar o tempo de espera.
-- Analisar o mix de pratos.
-- Estimar custos e margens.
-- Acompanhar a ocupação das mesas.
-- Identificar necessidades de reposição.
-- Apoiar decisões operacionais.
-
-## 4. Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - Python
 - Pandas
 - Streamlit
-- SQLite
 - GitHub
+- Streamlit Community Cloud
 
-## 5. Indicadores analisados
+## Estrutura do projeto
 
-- Receita estimada.
-- Custo estimado.
-- Margem de contribuição.
-- Tempo de fila.
-- Ocupação dos salões.
-- Limpeza das mesas.
-- Desperdício de alimentos.
+- app.py — Interface, indicadores e funcionalidades da plataforma.
+- database.py — Consulta e tratamento da base de dados.
+- data/ — Armazenamento dos dados utilizados.
+- .streamlit/ — Configurações visuais da aplicação.
+- requirements.txt — Dependências do projeto.
+- README.md — Documentação.
 
-## 6. Estrutura do projeto
+## Metodologia
 
-O projeto utiliza Python para processamento dos dados e Streamlit para visualização dos indicadores.
+O projeto utiliza dados sintéticos, análises descritivas, indicadores de desempenho, simulações interativas e regras automatizadas de classificação de alertas.
 
-## 7. Observação
+## Resultados esperados
 
-Os dados demonstrativos serão identificados como simulados.
-Os resultados não representam dados reais do restaurante.
+- Redução dos gargalos operacionais.
+- Melhor aproveitamento da capacidade dos salões.
+- Redução do desperdício de alimentos.
+- Maior controle dos custos.
+- Otimização da margem financeira.
+- Apoio à tomada de decisão gerencial.
 
-## 8. Instituição
+## Limitações
 
-FMU — Hackathon Tech 2026.2.
+O BoviCore é um Produto Mínimo Viável (MVP) acadêmico. Os dados e cenários apresentados são simulados, sem integração direta com a operação real do restaurante. Os benefícios apresentados são resultados esperados, ainda não validados em ambiente real.
+
+## Contexto acadêmico
+
+**Hackathon Tech FMU 2026.2**
+
+Ciência de Dados aplicada à inteligência operacional e financeira.
+
+---
+
+**BOVICORE — Inteligência que transforma operações.**
