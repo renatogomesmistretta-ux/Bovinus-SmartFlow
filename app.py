@@ -186,10 +186,7 @@ for nome, total in saloes.items():
 
     html += "</div>"
 
-    st.markdown(
-        html,
-        unsafe_allow_html=True
-    )
+    st.html(html)
 
     st.caption(
         "🟢 Disponível | 🔴 Ocupada | 🟡 Limpeza pendente"
