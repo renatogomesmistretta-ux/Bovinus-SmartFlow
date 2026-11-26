@@ -262,3 +262,83 @@ st.info(
     "MVP acadêmico com dados sintéticos e simulações "
     "interativas. Não conectado à operação real do restaurante."
 )
+
+# Central de Inteligencia Operacional
+
+st.divider()
+
+st.header("Central de Inteligência Operacional")
+
+st.caption(
+    "Diagnóstico automatizado e recomendações gerenciais."
+)
+
+alertas = []
+
+# Analise financeira
+
+margem_atual = margem / receita * 100 if receita > 0 else 0
+
+if receita <= 0:
+    alertas.append(("Atencao", "Receita", 
+        "Não há receita disponível para análise."))
+elif margem_atual < 60:
+    alertas.append(("Atencao", "Margem financeira",
+        f"Margem de {margem_atual:.1f}%. Reavaliar custos e mix de pratos."))
+else:
+    alertas.append(("Adequado", "Margem financeira",
+        f"Margem de {margem_atual:.1f}% dentro da meta."))
+
+# Analise de filas
+
+for nome, tempo in filas.items():
+
+    if tempo >= 5:
+        alertas.append(("Critico", nome,
+            f"Espera de {tempo:.1f} minutos. Reforçar atendimento."))
+
+    elif tempo >= 3:
+        alertas.append(("Atencao", nome,
+            f"Espera de {tempo:.1f} minutos. Monitorar fluxo."))
+
+    else:
+        alertas.append(("Adequado", nome,
+            f"Espera de {tempo:.1f} minutos. Fluxo adequado."))
+
+# Analise de desperdicio
+
+if desperdicio > 5:
+    alertas.append(("Atencao", "Desperdício",
+        f"Índice de {desperdicio:.1f}%. Reavaliar produção e reposição."))
+else:
+    alertas.append(("Adequado", "Desperdício",
+        f"Índice de {desperdicio:.1f}% dentro da meta."))
+
+# Resumo gerencial
+
+criticos = sum(a[0] == "Critico" for a in alertas)
+atencao = sum(a[0] == "Atencao" for a in alertas)
+adequados = sum(a[0] == "Adequado" for a in alertas)
+
+c1, c2, c3 = st.columns(3)
+
+c1.metric("Alertas críticos", criticos)
+c2.metric("Pontos de atenção", atencao)
+c3.metric("Indicadores adequados", adequados)
+
+st.subheader("Recomendações gerenciais")
+
+for prioridade in ["Critico", "Atencao", "Adequado"]:
+
+    for status, titulo, mensagem in alertas:
+
+        if status == prioridade:
+
+            if status == "Critico":
+                st.error(f"🔴 {titulo}: {mensagem}")
+
+            elif status == "Atencao":
+                st.warning(f"🟡 {titulo}: {mensagem}")
+
+            else:
+                st.success(f"🟢 {titulo}: {mensagem}")
