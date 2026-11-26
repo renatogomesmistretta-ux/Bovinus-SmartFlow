@@ -218,7 +218,7 @@ for nome, total in saloes.items():
     html = """
     <div style="display:grid;
     grid-template-columns:repeat(10,1fr);
-    gap:8px;margin:15px 0;">
+    gap:8px;">
     """
 
     for mesa in range(1, total + 1):
