@@ -239,9 +239,13 @@ st.metric("Índice de desperdício", f"{desperdicio:.1f}%")
 if desperdicio > 5:
     st.warning("Reavaliar produção e reposição.")
 
+status_cubas = {}
+
 for cuba in ["Saladas", "Pratos quentes", "Proteínas"]:
 
     nivel = st.slider(f"Nível da cuba - {cuba}", 0, 100, 70)
+
+    status_cubas[cuba] = nivel
 
     if nivel <= 20:
         st.error(f"Reposição necessária: {cuba}")
@@ -283,6 +287,22 @@ st.caption(
 )
 
 alertas = []
+
+# Analise dos niveis das cubas
+
+for cuba, nivel in status_cubas.items():
+
+    if nivel <= 20:
+        alertas.append(("Critico", cuba,
+            f"Nível de {nivel}%. Realizar reposição imediata."))
+
+    elif nivel <= 40:
+        alertas.append(("Atencao", cuba,
+            f"Nível de {nivel}%. Preparar reposição."))
+
+    else:
+        alertas.append(("Adequado", cuba,
+            f"Nível de {nivel}%. Abastecimento adequado."))
 
 # Analise de ocupacao dos saloes
 
