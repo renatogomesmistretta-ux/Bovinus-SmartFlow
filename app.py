@@ -54,7 +54,11 @@ mix = dados.groupby("prato")[
     ["receita_total", "custo_total", "margem_contribuicao"]
 ].sum()
 
-st.bar_chart(mix)
+st.bar_chart(
+    mix,
+    stack=False,
+    color=["#DC2626", "#9CA3AF", "#22C55E"]
+)
 st.dataframe(mix, use_container_width=True)
 
 # Simulador de pesagem
