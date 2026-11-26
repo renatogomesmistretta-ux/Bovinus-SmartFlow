@@ -9,26 +9,16 @@ st.set_page_config(
 )
 
 st.html("""
-    <div style="margin-bottom: 5px;">
-        <span style="font-size: 52px; font-weight: 900; color: #FFFFFF;">BOVE</span><span style="font-size: 52px; font-weight: 900; color: #DC2626;">CORE</span>
-    </div>
-    <div style="font-size: 19px; color: #D1D5DB;">
-        Inteligência que transforma operações.
-    </div>
+<div style="margin-bottom: 5px;">
+    <span style="font-size:52px;font-weight:900;color:#FFFFFF;">BOVE</span><span style="font-size:52px;font-weight:900;color:#DC2626;">CORE</span>
+</div>
+<div style="font-size:19px;color:#D1D5DB;">
+    Inteligência que transforma operações.
+</div>
 """)
 
 st.caption("Plataforma de Inteligência Operacional e Financeira")
-st.caption("Hackathon Tech FMU 2026.2 | Bovinu's Grill & Beer — Unidade Augusta")
-
-st.divider()
-        <span style="font-size: 52px; font-weight: 900; color: #FFFFFF;">BOVI</span><span style="font-size: 52px; font-weight: 900; color: #DC2626;">360</span>
-    </div>
-    <div style="font-size: 19px; color: #D1D5DB;">
-        Plataforma de Inteligência Operacional e Financeira
-    </div>
-""")
-
-st.caption("Hackathon Tech FMU 2026.2 | Bovinu's Grill & Beer — Unidade Augusta")
+st.caption("Hackathon Tech FMU 2026.2 | Unidade Augusta")
 
 st.divider()
 
