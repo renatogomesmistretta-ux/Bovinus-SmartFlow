@@ -139,6 +139,8 @@ saloes = {
     "Superior": 40
 }
 
+status_saloes = {}
+
 for nome, total in saloes.items():
 
     st.subheader(nome)
@@ -154,6 +156,13 @@ for nome, total in saloes.items():
     )
 
     livres = total - ocupadas - limpeza
+
+    status_saloes[nome] = {
+        "total": total,
+        "ocupadas": ocupadas,
+        "limpeza": limpeza,
+        "livres": livres
+    }
 
     c1, c2, c3 = st.columns(3)
 
@@ -274,6 +283,30 @@ st.caption(
 )
 
 alertas = []
+
+# Analise de ocupacao dos saloes
+
+for nome, info in status_saloes.items():
+
+    ocupacao = info["ocupadas"] / info["total"] * 100
+
+    if ocupacao >= 90 or info["livres"] == 0:
+        alertas.append(("Critico", nome,
+            f"Ocupação de {ocupacao:.1f}%. "
+            f"Apenas {info['livres']} mesas disponíveis. Gerenciar fluxo de clientes."))
+
+    elif info["limpeza"] >= 3:
+        alertas.append(("Atencao", nome,
+            f"{info['limpeza']} mesas aguardando limpeza. Acionar equipe de limpeza."))
+
+    elif ocupacao >= 80:
+        alertas.append(("Atencao", nome,
+            f"Ocupação de {ocupacao:.1f}%. Monitorar disponibilidade."))
+
+    else:
+        alertas.append(("Adequado", nome,
+            f"Ocupação de {ocupacao:.1f}%. "
+            f"{info['livres']} mesas disponíveis."))
 
 # Analise financeira
 
