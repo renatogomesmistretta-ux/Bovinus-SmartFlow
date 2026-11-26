@@ -40,6 +40,22 @@ st.sidebar.divider()
 st.sidebar.header("Navegação")
 
 st.sidebar.markdown("""
+📊 [Visão financeira](#indicadores-financeiros)
+
+🍽️ [Análise de pratos](#analise-do-mix-de-pratos)
+
+📈 [Simulador de margem](#simulador-de-mix-e-margem)
+
+⏱️ [Gestão de filas](#monitoramento-de-filas)
+
+🪑 [Gestão de salões](#monitoramento-das-90-mesas)
+
+♻️ [Buffet e desperdício](#controle-de-desperdicio)
+
+🎯 [Central de inteligência](#central-de-inteligencia-operacional)
+
+🗃️ [Base de dados](#base-de-dados-operacionais)
+""")
 - [Visão financeira](#indicadores-financeiros)
 - [Análise de pratos](#analise-do-mix-de-pratos)
 - [Simulador de margem](#simulador-de-mix-e-margem)
