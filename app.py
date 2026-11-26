@@ -152,6 +152,49 @@ for nome, total in saloes.items():
 
     st.progress(ocupadas / total)
 
+    html = """
+    <div style="display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:8px;margin:15px 0;">
+    """
+
+    for mesa in range(1, total + 1):
+
+        if mesa <= ocupadas:
+            cor = "#DC2626"
+            status = "Ocupada"
+
+        elif mesa <= ocupadas + limpeza:
+            cor = "#EAB308"
+            status = "Aguardando limpeza"
+
+        else:
+            cor = "#22C55E"
+            status = "Disponível"
+
+        html += f"""
+        <div title="Mesa {mesa}: {status}"
+        style="background:{cor};
+        padding:12px 2px;
+        border-radius:6px;
+        text-align:center;
+        font-weight:bold;
+        color:#111111;">
+        {mesa:02d}
+        </div>
+        """
+
+    html += "</div>"
+
+    st.markdown(
+        html,
+        unsafe_allow_html=True
+    )
+
+    st.caption(
+        "🟢 Disponível | 🔴 Ocupada | 🟡 Limpeza pendente"
+    )
+
     if limpeza >= 3:
         st.warning("Acionar equipe de limpeza.")
 
